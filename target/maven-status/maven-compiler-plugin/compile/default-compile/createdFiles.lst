@@ -1,0 +1,6 @@
+cl\duoc\jv0101\caso04\prestamos\config\OpenApiConfig.class
+cl\duoc\jv0101\caso04\prestamos\service\PrestamoService.class
+cl\duoc\jv0101\caso04\prestamos\controller\PrestamoController.class
+cl\duoc\jv0101\caso04\prestamos\PrestamoApplication.class
+cl\duoc\jv0101\caso04\prestamos\repository\PrestamoRepository.class
+cl\duoc\jv0101\caso04\prestamos\model\Prestamo.class

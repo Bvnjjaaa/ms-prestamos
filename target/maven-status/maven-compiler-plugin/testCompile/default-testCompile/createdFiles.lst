@@ -1,0 +1,6 @@
+cl\duoc\jv0101\caso04\prestamos\cucumber\CucumberSpringConfiguration.class
+cl\duoc\jv0101\caso04\prestamos\PrestamoControllerTest.class
+cl\duoc\jv0101\caso04\prestamos\OpenApiConfigTest.class
+cl\duoc\jv0101\caso04\prestamos\PrestamoServiceTest.class
+cl\duoc\jv0101\caso04\prestamos\cucumber\CucumberRunnerTest.class
+cl\duoc\jv0101\caso04\prestamos\cucumber\PrestamoSteps.class
