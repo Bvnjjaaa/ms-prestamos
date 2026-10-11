@@ -1,5 +1,0 @@
-GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-Préstamos | prestamos,cl.duoc.jv0101.caso04.prestamos.config,OpenApiConfig,0,17,0,0,0,6,0,2,0,2
-Préstamos | prestamos,cl.duoc.jv0101.caso04.prestamos.controller,PrestamoController,0,53,0,2,0,11,0,7,0,6
-Préstamos | prestamos,cl.duoc.jv0101.caso04.prestamos.service,PrestamoService,0,68,0,0,0,15,0,8,0,8
-Préstamos | prestamos,cl.duoc.jv0101.caso04.prestamos.model,Prestamo,0,31,0,0,0,11,0,9,0,9

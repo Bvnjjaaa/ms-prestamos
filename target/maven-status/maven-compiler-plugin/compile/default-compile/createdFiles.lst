@@ -1,6 +1,5 @@
-cl\duoc\jv0101\caso04\prestamos\config\OpenApiConfig.class
-cl\duoc\jv0101\caso04\prestamos\service\PrestamoService.class
-cl\duoc\jv0101\caso04\prestamos\controller\PrestamoController.class
-cl\duoc\jv0101\caso04\prestamos\PrestamoApplication.class
-cl\duoc\jv0101\caso04\prestamos\repository\PrestamoRepository.class
-cl\duoc\jv0101\caso04\prestamos\model\Prestamo.class
+cl\novabank\prestamos\PrestamosApplication.class
+cl\novabank\prestamos\controller\PrestamoController.class
+cl\novabank\prestamos\repository\PrestamoRepository.class
+cl\novabank\prestamos\model\Prestamo.class
+cl\novabank\prestamos\service\PrestamoService.class
