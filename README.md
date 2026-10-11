@@ -1,65 +1,57 @@
-# Préstamos — Microservicio de riesgo prestamos
+# ms-prestamos — Microservicio de Préstamos
 
-Microservicio correspondiente al **caso caso04 — NovaBank** (Banca digital / fintech) de la Evaluación Parcial N°1.
+Microservicio correspondiente al **caso NovaBank** (Banca digital / fintech) de la **Evaluación Parcial N°2**.
 
 | | |
 |---|---|
-| Asignatura | JVY0101 — Java: Diseño y Construcción de Soluciones Nativas en Nube |
-| Stack | Spring Boot 3.3 · Java 21 · Maven · Spring Data JPA · H2 · springdoc-openapi |
-| Calidad | JaCoCo cobertura LINE 100% · Cucumber (BDD) alineado a endpoints REST |
-| Entrega | Docker / Docker Compose |
+| **Asignatura** | JVY0101 — Java: Diseño y Construcción de Soluciones Nativas en Nube |
+| **Stack** | Spring Boot 3.2.5 · Java 17 · Maven Wrapper · Spring Data JPA · H2 Database |
+| **Arquitectura** | Capas (Controller, Service, Repository, Model) |
+| **Puerto** | 8084 |
 
 ## Responsabilidad (SRP)
 
-administra los datos y la lógica del dominio de Préstamos del caso caso04 (NovaBank). Su base de datos es una **H2 en memoria** (un solo microservicio por base), cumpliendo aislamiento de datos por dominio.
+Gestiona el ciclo de vida de los préstamos de NovaBank: registra solicitudes calculando la cuota mediante la fórmula de amortización (monto, número de cuotas y tasa de interés), y permite evaluarlas para aprobarlas o rechazarlas, además de consultarlas por cliente. Su base de datos es una **H2 en memoria** (`jdbc:h2:mem:novabank_loans_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE`), cumpliendo aislamiento de datos por dominio.
 
-## Página de presentación
+## Consola y Persistencia
 
-Al ejecutar el servicio, `http://localhost:8080/` muestra la página de presentación del microservicio con documentación y enlaces a:
+Al ejecutar el servicio en el puerto `8084`, se puede acceder a la consola de persistencia H2:
 
-- **Swagger UI**: `/swagger-ui/index.html`
-- **OpenAPI (yaml)**: `/v3/api-docs.yaml`
-- **ReDoc**: `/redoc.html`
-- **H2 Console**: `/h2-console`
+- **H2 Console**: `http://localhost:8084/h2-console`
+- **JDBC URL**: `jdbc:h2:mem:novabank_loans_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE`
+- **Usuario**: `sa`
+- **Contraseña**: *(en blanco)*
 
-## Endpoints
+## Endpoints Principales (`/api/prestamos`)
 
 | Método | Ruta | Descripción |
 |--------|------|-------------|
-| GET | `/api/prestamos` | Lista todos los recursos |
-| GET | `/api/prestamos/{id}` | Obtiene un recurso por id |
-| POST | `/api/prestamos` | Crea un recurso |
-| PUT | `/api/prestamos/{id}` | Actualiza un recurso |
-| DELETE | `/api/prestamos/{id}` | Elimina un recurso |
+| POST | `/api/prestamos/solicitud` | Registra una solicitud validando RUT, monto, número de cuotas y tasa; calcula la cuota y asigna estado SOLICITADO; responde 201. |
+| GET | `/api/prestamos` | Lista todos los préstamos registrados. |
+| GET | `/api/prestamos/{id}` | Obtiene un préstamo por id; responde 404 si no existe. |
+| GET | `/api/prestamos/cliente/{rut}` | Lista todos los préstamos de un cliente según su RUT. |
+| PUT | `/api/prestamos/{id}/evaluar` | Evalúa un préstamo (`aprobar=true` o `false`), cambiando su estado a APROBADO o RECHAZADO; responde 404 si no existe. |
 
-## Documentación del proyecto
+## Instrucciones de Clonación, Compilación y Ejecución Local
 
-La documentación completa está en la carpeta [`docs/`](docs/):
+1. **Clonar el repositorio:**
+   ```bash
+   git clone <URL_DEL_REPOSITORIO>
+   cd ms-prestamos
+   ```
 
-- [`docs/00_Resumen.md`](docs/00_Resumen.md) — propósito, responsabilidad y tecnologías
-- [`docs/01_Arquitectura.md`](docs/01_Arquitectura.md) — componentes, arquitectura y patrones
-- [`docs/02_API.md`](docs/02_API.md) — contrato REST y ejemplos curl
-- [`docs/03_Pruebas.md`](docs/03_Pruebas.md) — tests unitarios, cobertura y Cucumber
-- [`docs/04_Despliegue.md`](docs/04_Despliegue.md)
-- [`docs/05_Justificacion.md`](docs/05_Justificacion.md) — justificación del servicio: RF/RNF/seguridad cubiertos, stack y por qué cada tecnología AWS
-- [`docs/diagramas/`](docs/diagramas/) — C4 (contexto, contenedores, componentes), secuencia e infraestructura AWS — Docker, Docker Compose e integración
+2. **Compilar y empaquetar con Maven Wrapper:**
+   ```bash
+   .\mvnw.cmd clean package -DskipTests
+   ```
 
-## Cómo ejecutar locmente
-
-```bash
-mvn spring-boot:run
-```
-
-## Cómo ejecutar con Docker
-
-```bash
-docker compose up --build
-# http://localhost:8080
-```
+3. **Ejecutar el ejecutable .jar generado:**
+   ```bash
+   java -jar target/ms-prestamos-1.0.0.jar
+   ```
 
 ## Cómo ejecutar las pruebas
 
 ```bash
-mvn test      # unit tests + Cucumber
-mvn verify    # + verificación de cobertura JaCoCo (100% LINE, falla si baja)
+.\mvnw.cmd test
 ```
