@@ -1,8 +1,6 @@
 services:
-  prestamos-svc:
+  prestamos:
     build: .
-    image: duoc/jv0101-caso04-prestamos:1.0.0
-    container_name: caso04-prestamos-svc
+    image: novabank/prestamos:local
     ports:
-      - "${PORT:-8080}:8080"
-    restart: unless-stopped
+      - "127.0.0.1:${PORT:-8084}:8080"
